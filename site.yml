@@ -1,0 +1,12 @@
+---
+
+- name: install drupal dev
+  hosts: all
+  sudo: yes
+
+  roles:
+    - webservers
+    - databases
+    - php5
+#    - typo3
+#    - drupal

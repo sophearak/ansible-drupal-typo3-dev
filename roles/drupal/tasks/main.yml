@@ -1,0 +1,25 @@
+---
+
+- name: Create site directory
+  file: dest={{ site_directory }} mode=775 owner=www-data group=www-data recurse=yes state=directory
+
+- name: Download drupal source
+  get_url: url=http://ftp.drupal.org/files/projects/drupal-{{ drupal_version }}.zip dest={{ site_directory }}
+
+- name: Install Unzip
+  apt: name=unzip state=present
+
+- name: Unzip drupal source
+  shell: cd {{ site_directory }} && unzip drupal-{{ drupal_version }}.zip
+
+- name: Copy to root direcotry
+  shell: sudo cp -rf {{ site_directory }}/drupal-{{ drupal_version }}/* {{ site_directory }}/
+
+- name: Create files directory for first installation
+  file: dest={{ site_directory }}/sites/default/files mode=775 owner=www-data group=www-data recurse=yes state=directory
+
+- name: Copy default.settings.php to settings.php
+  shell: sudo cp {{ site_directory }}/sites/default/default.settings.php {{ site_directory }}/sites/default/settings.php
+
+- name: change permission
+  shell: chown www-data:www-data {{ site_directory }} && chmod -R 775 {{ site_directory }}

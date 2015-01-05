@@ -1,0 +1,27 @@
+---
+
+- name: Install MySql
+  apt: name={{ item }} state=present
+  with_items:
+    - mysql-server
+    - python-mysqldb
+    - php5-mysql
+  tags:
+    - mysql
+
+- name: Start Mysql Service
+  service: name=mysql state=started enabled=true
+
+- name: Create New MySql Database
+  action:
+    mysql_db
+    db={{ item }}
+    state=present
+  with_items: db_name
+
+- name: Create New MySql User
+  action:
+    mysql_user user={{ item[0] }} password={{ item[1] }} priv=*.*:ALL,GRANT state=present
+  with_nested:
+    - db_user
+    - db_pswd

@@ -1,0 +1,28 @@
+---
+
+- name: Create site directory
+  file: dest={{ site_directory }} mode=775 owner=www-data group=www-data recurse=yes state=directory
+
+- name: Download typo3 source
+  get_url: url=http://prdownloads.sourceforge.net/typo3/typo3_src-{{ typo3_version }}.zip dest={{ site_directory }}
+
+- name: Install Unzip
+  apt: name=unzip state=present
+
+- name: Extract typo3 source
+  shell: cd {{ site_directory }} && unzip typo3_src-{{ typo3_version }}.zip
+
+- name: Copy to root direcotry
+  shell: sudo cp -rf {{ site_directory }}/typo3_src-{{ typo3_version }}/* {{ site_directory }}/
+
+- name: Create FIRST_INSTALL for first installation
+  shell: touch /{{ site_directory }}/FIRST_INSTALL
+
+- name: Create typo3_src for first installation
+  shell: touch /{{ site_directory }}/typo3_src
+
+- name: Rename _.htaccess to .htaccess
+  shell: sudo mv {{ site_directory }}/_.htaccess {{ site_directory }}/.htaccess
+
+- name: change permission
+  shell: chown www-data:www-data {{ site_directory }} && chmod -R 775 {{ site_directory }}

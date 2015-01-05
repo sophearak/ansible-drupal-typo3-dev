@@ -1,0 +1,43 @@
+---
+
+- name: Install Apache2
+  apt: name={{ item }} state=present
+  with_items:
+    - apache2
+    - php5
+  tags:
+    - apache
+
+- name: Remove default vhost
+  file:
+    path=/etc/apache2/sites-enabled/000-default.conf
+    state=absent
+  tags:
+    - apache
+    - apache_vhost
+
+- name: Copy new virtual host
+  template:
+    src=vhost.j2
+    dest=/etc/apache2/sites-available/{{ vhost_filename }}
+  tags:
+    - apache
+    - apache_vhost
+  notify:
+    - restart apache
+
+- name: Enable the new virtual host
+  file:
+    src=/etc/apache2/sites-available/{{ vhost_filename }}
+    dest=/etc/apache2/sites-enabled/{{ vhost_filename }}
+    state=link
+  tags:
+    - apache
+    - apache_vhost
+  notify:
+    - restart apache
+
+- name: Enable rewrite
+  shell: sudo a2enmod rewrite
+  notify:
+    - restart apache
