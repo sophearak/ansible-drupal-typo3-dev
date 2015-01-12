@@ -1,10 +1,10 @@
 ---
 
 # Apache2 Configuration
-vhost_filename: drupal.dev.conf
+vhost_filename: typo3.dev.conf
 apache_vhosts:
-  - server_name: drupal.dev
-    document_root: /var/www/drupal.dev
+  - server_name: typo3.dev
+    document_root: /var/www/typo3.dev
 
 
 # PHP configuration
@@ -22,24 +22,20 @@ post_max_size: 10M
 upload_max_filesize: 10M
 
 # recommend for by drupal developer
-expose_php: Off
-allow_url_fopen: Off
+expose_php: On
+allow_url_fopen: On
 
 
 # Mysql Database Auth
-db_name: drupal
-db_user: drupal
-db_pswd: drupal
-
-
-# Drupal
-
-drupal_version: 7.34
-site_directory: /var/www/drupal.dev
-
+db_name: typo3
+db_user: typo3
+db_pswd: typo3
 
 # Typo3
 #typo3_version: 6.2.9
 #site_directory: /var/www/typo3.dev
 
+# Drupal
 
+#drupal_version: 7.34
+#site_directory: /var/www/drupal.dev
