@@ -1,6 +1,6 @@
 ---
 
-- name: install drupal dev
+- name: install typo3 dev
   hosts: all
   sudo: yes
 
