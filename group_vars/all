@@ -32,8 +32,8 @@ db_user: typo3
 db_pswd: typo3
 
 # Typo3
-#typo3_version: 6.2.9
-#site_directory: /var/www/typo3.dev
+typo3_version: 6.2.9
+site_directory: /var/www/typo3.dev
 
 # Drupal
 
