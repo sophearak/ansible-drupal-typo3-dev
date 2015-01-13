@@ -1,5 +1,5 @@
 
-##Up and running Drupal or Typo3 with no time.
+##Up and running Typo3 or Drupal with no time.
 
 This is ansible playbook for my vagrant in development.
 
