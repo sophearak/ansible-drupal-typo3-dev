@@ -19,6 +19,7 @@ php_packages:
   - php5-imagick
 
 # recommend for typo3
+memory_limit: 512M
 max_execution_time: 240
 post_max_size: 10M
 upload_max_filesize: 10M
