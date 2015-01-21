@@ -1,0 +1,7 @@
+---
+
+- name: enable server command
+  copy: src=../templates/server.sh dest=/home/vagrant/.scripts/server.sh
+
+- name: enable db command
+  copy: src=../templates/db.sh dest=home/vagrant/.scripts/server.sh
